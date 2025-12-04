@@ -1,0 +1,19 @@
+{
+  "name": "aaw_backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonyNgugi76/aaw_backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonyNgugi76/aaw_backend/issues"
+  },
+  "homepage": "https://github.com/AntonyNgugi76/aaw_backend#readme",
+  "description": ""
+}
