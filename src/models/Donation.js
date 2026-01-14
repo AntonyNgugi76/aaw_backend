@@ -42,6 +42,11 @@ const DonationSchema = new mongoose.Schema(
       ref: "Pantry",
       default: null,
     },
+    matchedRequest: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Request",
+      default: null,
+    },
 
     status: {
       type: String,

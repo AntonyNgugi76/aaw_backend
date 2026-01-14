@@ -3,7 +3,6 @@ const authService = require("../services/auth.service");
 
 const register = async (req, res) => {
   try {
-    console.log("Request body:", req.body);
     // express-validator errors
     const errors = validationResult(req);
     if (!errors.isEmpty())

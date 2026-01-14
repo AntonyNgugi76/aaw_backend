@@ -27,7 +27,8 @@ const getAllRequests = async () => {
   return Request.find({})
     .populate("user")
     .populate("category")
-    .populate("fulfillmentPantry");
+    .populate("fulfillmentPantry")
+    .populate("matchedDonation");
 };
 
 const updateRequestStatus = async (id, status) => {

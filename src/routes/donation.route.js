@@ -3,7 +3,7 @@ const { body } = require("express-validator");
 const router = express.Router();
 
 const donationController = require("../controllers/donation.controller");
-const { protect } = require("../middleware/auth");
+const { protect, authorize } = require("../middleware/auth");
 
 const donationValidation = [
   body("category").notEmpty().withMessage("Category is required"),
@@ -29,5 +29,8 @@ router.get(
   protect,
   donationController.getCategoryDonations
 );
+router.get("/", protect, authorize('admin'), donationController.getAllDonations);
+router.put("/:id/status", protect, authorize('admin'), donationController.updateDonationStatus);
+router.post("/match-request", protect, authorize("admin"), donationController.matchDonationWithRequest);
 
 module.exports = router;
