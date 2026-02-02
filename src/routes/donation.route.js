@@ -3,7 +3,7 @@ const { body } = require("express-validator");
 const router = express.Router();
 
 const donationController = require("../controllers/donation.controller");
-const { protect } = require("../middleware/auth");
+const { protect, authorize } = require("../middleware/auth");
 
 const donationValidation = [
   body("category").notEmpty().withMessage("Category is required"),
@@ -28,6 +28,14 @@ router.get(
   "/donation-categories/:categoryId/donations",
   protect,
   donationController.getCategoryDonations
+);
+
+// Admin: get all donations (with optional status filter)
+router.get(
+  "/",
+  protect,
+  authorize("admin"),
+  donationController.getAllDonations
 );
 
 module.exports = router;

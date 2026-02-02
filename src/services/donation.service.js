@@ -36,6 +36,7 @@ const getDonationById = async (id) => {
     .populate("dropOffPantry")
     .populate("pickupAssignedPantry");
 };
+
 const getDonationsByPantry = async (pantryId) => {
   return Donation.find({ dropOffPantry: pantryId }).populate(
     "user category dropOffPantry pickupAssignedPantry"
@@ -48,10 +49,16 @@ const getDonationsByCategory = async (categoryId) => {
   );
 };
 
+const getAllDonations = async (filter = {}) => {
+  return Donation.find(filter)
+    .populate("user category dropOffPantry pickupAssignedPantry assignedDriver");
+};
+
 module.exports = {
   createDonation,
   getUserDonations,
   getDonationById,
   getDonationsByPantry,
   getDonationsByCategory,
+  getAllDonations,
 };

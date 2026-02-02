@@ -51,3 +51,26 @@ exports.getCategoryDonations = async (req, res) => {
   );
   return res.json(donations);
 };
+
+exports.getAllDonations = async (req, res) => {
+  try {
+    const { status } = req.query;
+    const allowedStatuses = [
+      "pending",
+      "approved",
+      "assigned",
+      "collected",
+      "delivered",
+      "rejected",
+      "completed",
+    ];
+    let filter = {};
+    if (status && allowedStatuses.includes(status)) {
+      filter.status = status;
+    }
+    const donations = await donationService.getAllDonations(filter);
+    return res.json(donations);
+  } catch (err) {
+    return res.status(500).json({ message: "Server error" });
+  }
+};
