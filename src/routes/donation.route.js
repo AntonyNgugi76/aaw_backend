@@ -29,6 +29,9 @@ router.get(
   protect,
   donationController.getCategoryDonations
 );
+router.get("/", protect, authorize('admin'), donationController.getAllDonations);
+router.put("/:id/status", protect, authorize('admin'), donationController.updateDonationStatus);
+router.post("/match-request", protect, authorize("admin"), donationController.matchDonationWithRequest);
 
 // Admin: get all donations (with optional status filter)
 router.get(

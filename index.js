@@ -16,6 +16,10 @@ connectDB();
 const authRoutes = require("./src/routes/auth.route");
 app.use("/api/auth", authRoutes);
 
+//users routes 
+const userRoutes = require("./src/routes/user.routes");
+app.use("/api/users", userRoutes);
+
 const donationRoutes = require("./src/routes/donation.route");
 const categoryRoutes = require("./src/routes/category.route");
 

@@ -28,6 +28,11 @@ const RequestSchema = new mongoose.Schema(
       ref: "Pantry",
       default: null,
     },
+    matchedDonation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Donation",
+      default: null,
+    },
 
     // Workflow status
     status: {
