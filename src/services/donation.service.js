@@ -49,9 +49,15 @@ const getDonationsByCategory = async (categoryId) => {
   );
 };
 
-const getAllDonations = async (filter = {}) => {
+const getAllDonations = async (filter = {}, limit = 20, skip = 0) => {
   return Donation.find(filter)
-    .populate("user category dropOffPantry pickupAssignedPantry assignedDriver");
+    .populate("user category dropOffPantry pickupAssignedPantry assignedDriver")
+    .limit(limit)
+    .skip(skip);
+};
+
+const countDonations = async (filter = {}) => {
+  return Donation.countDocuments(filter);
 };
 
 module.exports = {
@@ -61,4 +67,5 @@ module.exports = {
   getDonationsByPantry,
   getDonationsByCategory,
   getAllDonations,
+  countDonations,
 };

@@ -54,7 +54,7 @@ exports.getCategoryDonations = async (req, res) => {
 
 exports.getAllDonations = async (req, res) => {
   try {
-    const { status } = req.query;
+    const { status, limit = 20, skip = 0 } = req.query;
     const allowedStatuses = [
       "pending",
       "approved",
@@ -68,8 +68,18 @@ exports.getAllDonations = async (req, res) => {
     if (status && allowedStatuses.includes(status)) {
       filter.status = status;
     }
-    const donations = await donationService.getAllDonations(filter);
-    return res.json(donations);
+    const parsedLimit = Math.max(parseInt(limit, 10) || 20, 1);
+    const parsedSkip = Math.max(parseInt(skip, 10) || 0, 0);
+    const [donations, total] = await Promise.all([
+      donationService.getAllDonations(filter, parsedLimit, parsedSkip),
+      donationService.countDonations(filter),
+    ]);
+    return res.json({
+      donations,
+      total,
+      limit: parsedLimit,
+      skip: parsedSkip,
+    });
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
   }
